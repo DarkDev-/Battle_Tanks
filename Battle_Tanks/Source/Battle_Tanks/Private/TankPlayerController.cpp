@@ -26,17 +26,28 @@ void ATankPlayerController::AimTowardsCrosshair()
 	if (!GetControlledTank())
 		return;
 
-	FVector hit_location;
-	if (GetLookAtLocation(hit_location))
-		UE_LOG(LogTemp, Warning, TEXT("Looking at %s"), *hit_location.ToString());
+	//FVector hit_location;
+	//GetLookAtLocation(hit_location);
 }
 
 bool ATankPlayerController::GetLookAtLocation(FVector& hit_location) const
 {
 	FVector look_direction;
 	if (GetLookAtDirection(look_direction))
-		UE_LOG(LogTemp, Warning, TEXT("%s"), *look_direction.ToString());
+	{
+		const auto trace_start = PlayerCameraManager->GetCameraLocation();
+		const auto trace_end = trace_start + (look_direction * trace_range);
 
+		FHitResult hit;
+		if (GetWorld()->LineTraceSingleByChannel(hit, trace_start, trace_end, ECC_Visibility))
+		{
+			hit_location = hit.Location;
+			return true;
+		}
+	}
+
+	// Clear hit location
+	hit_location = FVector(0.0f);
 	return false;
 }
 

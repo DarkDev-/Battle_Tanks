@@ -32,4 +32,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float crosshair_y_location = 0.33f;
+
+	/** In cm */
+	UPROPERTY(EditAnywhere)
+	float trace_range = 1000000.0f;
 };

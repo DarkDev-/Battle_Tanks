@@ -8,9 +8,6 @@
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UE_LOG(LogTemp, Warning, TEXT("Spawning %s as AI"), *GetControlledTank()->GetName());
-	UE_LOG(LogTemp, Warning, TEXT("Looking at %s"), *GetPlayerTank()->GetName());
 }
 
 ATank* ATankAIController::GetControlledTank() const

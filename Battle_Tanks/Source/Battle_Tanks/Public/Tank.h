@@ -29,8 +29,12 @@ protected:
 	UTankAimingComponent* aiming_component;
 
 public:	
-	void AimAt(FVector location);
+	void AimAt(const FVector location);
 
 private:
+
+	/** In cm */
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float launch_speed = 100000.0f;
 	
 };

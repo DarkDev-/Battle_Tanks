@@ -25,7 +25,7 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	void AimAt(FVector location);
+	void AimAt(const FVector location, const float launch_speed);
 
 private:
 	UStaticMeshComponent* barrel;

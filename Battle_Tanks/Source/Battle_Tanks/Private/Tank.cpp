@@ -31,10 +31,9 @@ void ATank::Tick(float DeltaTime)
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
-void ATank::SetBarrel(UStaticMeshComponent* barrel)
+void ATank::SetBarrel(UTankBarrel* barrel)
 {
 	aiming_component->SetBarrel(barrel);
 }

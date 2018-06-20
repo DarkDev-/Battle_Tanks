@@ -3,7 +3,7 @@
 #include "TankAimingComponent.h"
 
 #include "Tank.h"
-#include "Components/StaticMeshComponent.h"
+#include "TankBarrel.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -28,7 +28,10 @@ void UTankAimingComponent::AimAt(const FVector location, const float launch_spee
 	{
 		const auto aim_direction = launch_velocity.GetSafeNormal();
 		MoveBarrel(aim_direction);
+		UE_LOG(LogTemp, Warning, TEXT("yay"));
 	}
+	else
+		UE_LOG(LogTemp, Warning, TEXT("aw"));
 }
 
 void UTankAimingComponent::MoveBarrel(FVector direction)
@@ -37,5 +40,5 @@ void UTankAimingComponent::MoveBarrel(FVector direction)
 	auto aim_as_rotator = direction.Rotation();
 	auto delta_rotator = aim_as_rotator - barrel_rotator;
 
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *delta_rotator.ToString());
+	barrel->Elevate(4.0f);
 }

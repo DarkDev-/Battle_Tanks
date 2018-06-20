@@ -7,7 +7,7 @@
 #include "Tank.generated.h"
 
 class UTankAimingComponent;
-class UStaticMeshComponent;
+class UTankBarrel;
 
 UCLASS()
 class BATTLE_TANKS_API ATank : public APawn
@@ -21,7 +21,7 @@ public:
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrel(UStaticMeshComponent* barrel);
+	void SetBarrel(UTankBarrel* barrel);
 
 protected:
 	void BeginPlay() override;

@@ -42,10 +42,10 @@ public:
 private:
 
 	/** In cm */
-	UPROPERTY(EditAnywhere, Category = Firing)
-	float launch_speed = 15000.0f;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float launch_speed = 10000.0f;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> projectile_bp;
 
 	UTankBarrel* barrel;

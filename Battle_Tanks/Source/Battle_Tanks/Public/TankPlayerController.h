@@ -27,13 +27,13 @@ private:
 	bool GetLookAtDirection(FVector& look_direction) const;
 	FVector2D GetCrosshairLocation() const;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float crosshair_x_location = 0.5f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float crosshair_y_location = 0.33f;
 
 	/** In cm */
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float trace_range = 1000000.0f;
 };

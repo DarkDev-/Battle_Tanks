@@ -11,7 +11,7 @@
 // Sets default values
 ATank::ATank()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	aiming_component = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
@@ -21,7 +21,7 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -48,7 +48,7 @@ void ATank::SetBarrel(UTankBarrel* barrel_component)
 
 void ATank::SetTurret(UTankTurretComponent* turret_component)
 {
-	if(turret_component)
+	if (turret_component)
 		aiming_component->SetTurret(turret_component);
 }
 
@@ -59,9 +59,12 @@ void ATank::AimAt(const FVector location)
 
 void ATank::Fire()
 {
-	if (!barrel)
-		return;
+	bool is_reloaded = (FPlatformTime::Seconds() - last_fire_time) > reload_time;
 
-	auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_bp, barrel->GetSocketLocation(FName("Launch_Location")), barrel->GetSocketRotation(FName("Launch_Location")));
-	projectile->LaunchProjectile(launch_speed);
+	if (barrel && is_reloaded)
+	{
+		auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_bp, barrel->GetSocketLocation(FName("Launch_Location")), barrel->GetSocketRotation(FName("Launch_Location")));
+		projectile->LaunchProjectile(launch_speed);
+		last_fire_time = (float)FPlatformTime::Seconds();
+	}
 }

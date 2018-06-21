@@ -24,14 +24,11 @@ void UTankAimingComponent::AimAt(const FVector location, const float launch_spee
 	FVector launch_velocity;
 	const FVector start_location = barrel->GetSocketLocation(FName("Launch_Location"));
 
-	if (UGameplayStatics::SuggestProjectileVelocity(this, launch_velocity, start_location, location, launch_speed))
+	if (UGameplayStatics::SuggestProjectileVelocity(this, launch_velocity, start_location, location, launch_speed, false, 0.0f, 0.0f, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
 		const auto aim_direction = launch_velocity.GetSafeNormal();
 		MoveBarrel(aim_direction);
-		UE_LOG(LogTemp, Warning, TEXT("yay"));
 	}
-	else
-		UE_LOG(LogTemp, Warning, TEXT("aw"));
 }
 
 void UTankAimingComponent::MoveBarrel(FVector direction)

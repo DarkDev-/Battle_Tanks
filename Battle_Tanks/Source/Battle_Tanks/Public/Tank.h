@@ -35,6 +35,6 @@ private:
 
 	/** In cm */
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float launch_speed = 100000.0f;
+	float launch_speed = 15000.0f;
 	
 };

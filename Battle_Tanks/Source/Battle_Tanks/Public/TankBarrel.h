@@ -16,7 +16,7 @@ class BATTLE_TANKS_API UTankBarrel : public UStaticMeshComponent
 	
 	
 public:
-	void Elevate(const float relative_speed);
+	void Elevate(float relative_speed);
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)

@@ -35,7 +35,14 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void ATank::SetBarrel(UTankBarrel* barrel)
 {
-	aiming_component->SetBarrel(barrel);
+	if(barrel)
+		aiming_component->SetBarrel(barrel);
+}
+
+void ATank::SetTurret(UTankTurretComponent* turret)
+{
+	if(turret)
+		aiming_component->SetTurret(turret);
 }
 
 void ATank::AimAt(const FVector location)

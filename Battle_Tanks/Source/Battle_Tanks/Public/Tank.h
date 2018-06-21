@@ -8,6 +8,7 @@
 
 class UTankAimingComponent;
 class UTankBarrel;
+class UTankTurretComponent;
 
 UCLASS()
 class BATTLE_TANKS_API ATank : public APawn
@@ -22,6 +23,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrel(UTankBarrel* barrel);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurret(UTankTurretComponent* turret);
 
 protected:
 	void BeginPlay() override;

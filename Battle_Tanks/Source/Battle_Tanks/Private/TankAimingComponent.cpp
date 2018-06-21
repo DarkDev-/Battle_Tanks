@@ -4,6 +4,8 @@
 
 #include "Tank.h"
 #include "TankBarrel.h"
+#include "TankTurretComponent.h"
+
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
@@ -38,4 +40,5 @@ void UTankAimingComponent::MoveBarrel(FVector direction)
 	auto delta_rotator = aim_as_rotator - barrel_rotator;
 
 	barrel->Elevate(delta_rotator.Pitch);
+	turret->Rotate(delta_rotator.Yaw);
 }

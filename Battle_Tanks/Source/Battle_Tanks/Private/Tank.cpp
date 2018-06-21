@@ -49,3 +49,8 @@ void ATank::AimAt(const FVector location)
 {
 	aiming_component->AimAt(location, launch_speed);
 }
+
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("PEWPEW"));
+}

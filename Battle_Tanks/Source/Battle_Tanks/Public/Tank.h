@@ -35,6 +35,9 @@ protected:
 public:	
 	void AimAt(const FVector location);
 
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
 private:
 
 	/** In cm */

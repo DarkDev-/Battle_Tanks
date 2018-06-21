@@ -2,7 +2,11 @@
 
 #include "Tank.h"
 
+#include "Engine/World.h"
+
 #include "TankAimingComponent.h"
+#include "Projectile.h"
+#include "TankBarrel.h"
 
 // Sets default values
 ATank::ATank()
@@ -33,16 +37,19 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void ATank::SetBarrel(UTankBarrel* barrel)
+void ATank::SetBarrel(UTankBarrel* barrel_component)
 {
-	if(barrel)
-		aiming_component->SetBarrel(barrel);
+	if (barrel_component)
+	{
+		aiming_component->SetBarrel(barrel_component);
+		barrel = barrel_component;
+	}
 }
 
-void ATank::SetTurret(UTankTurretComponent* turret)
+void ATank::SetTurret(UTankTurretComponent* turret_component)
 {
-	if(turret)
-		aiming_component->SetTurret(turret);
+	if(turret_component)
+		aiming_component->SetTurret(turret_component);
 }
 
 void ATank::AimAt(const FVector location)
@@ -52,5 +59,9 @@ void ATank::AimAt(const FVector location)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("PEWPEW"));
+	if (!barrel)
+		return;
+
+	auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_bp, barrel->GetSocketLocation(FName("Launch_Location")), barrel->GetSocketRotation(FName("Launch_Location")));
+	projectile->LaunchProjectile(launch_speed);
 }

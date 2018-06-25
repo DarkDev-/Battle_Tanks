@@ -9,7 +9,6 @@
 class UTankAimingComponent;
 class UTankBarrel;
 class UTankTurretComponent;
-class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -33,9 +32,6 @@ protected:
 	void BeginPlay() override;
 
 	UTankAimingComponent* aiming_component;
-
-	UPROPERTY(BlueprintReadOnly)
-	UTankMovementComponent* movement_component;
 
 public:	
 	void AimAt(const FVector location);

@@ -31,6 +31,7 @@ public:
 protected:
 	void BeginPlay() override;
 
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
 	UTankAimingComponent* aiming_component;
 
 public:	
@@ -40,12 +41,11 @@ public:
 	void Fire();
 
 private:
-
-	/** In cm */
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	// In cm
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float launch_speed = 10000.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	TSubclassOf<AProjectile> projectile_bp;
 
 	UTankBarrel* barrel;

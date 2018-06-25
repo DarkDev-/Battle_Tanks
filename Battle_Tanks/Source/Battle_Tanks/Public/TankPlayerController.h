@@ -19,6 +19,7 @@ protected:
 public:
 	void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
 
 private:
@@ -33,7 +34,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float crosshair_y_location = 0.33f;
 
-	/** In cm */
+	// In cm	
 	UPROPERTY(EditDefaultsOnly)
 	float trace_range = 1000000.0f;
 };

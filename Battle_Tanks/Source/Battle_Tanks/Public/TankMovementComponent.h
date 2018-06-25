@@ -14,21 +14,18 @@ class BATTLE_TANKS_API UTankMovementComponent : public UNavMovementComponent
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void MoveForward(float throttle);
 
-	UFUNCTION(BlueprintCallable, Category = Input)
+	UFUNCTION(BlueprintCallable, Category = "Input")
 	void TurnRight(float throttle);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void InitializeComponents(UTankTrackComponent* track_left, UTankTrackComponent* track_right);
 
-protected:
+private:
 	void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
-private:
 	UTankTrackComponent* tank_track_left;
 	UTankTrackComponent* tank_track_right;
-	
-	
 };

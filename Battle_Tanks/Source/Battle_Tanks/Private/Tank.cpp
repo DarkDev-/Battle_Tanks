@@ -5,6 +5,8 @@
 #include "Engine/World.h"
 
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
+
 #include "Projectile.h"
 #include "TankBarrel.h"
 
@@ -15,6 +17,7 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = true;
 
 	aiming_component = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	movement_component = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
 }
 
 // Called when the game starts or when spawned

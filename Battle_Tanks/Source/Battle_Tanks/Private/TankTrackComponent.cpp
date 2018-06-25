@@ -8,7 +8,7 @@ void UTankTrackComponent::SetThrottle(float throttle)
 	throttle = FMath::Clamp(throttle, -1.0f, 1.0f);
 	UE_LOG(LogTemp, Warning, TEXT("%s wroom: %f"), *GetName(), throttle);
 
-	auto applied_force = GetForwardVector() * throttle * max_force;
+	auto applied_force = GetForwardVector() * throttle * max_force * 100.0f;
 	auto force_location = GetComponentLocation();
 	auto root = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
 

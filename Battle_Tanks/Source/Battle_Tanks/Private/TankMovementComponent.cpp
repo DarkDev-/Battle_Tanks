@@ -3,12 +3,20 @@
 #include "TankMovementComponent.h"
 #include "TankTrackComponent.h"
 
-void UTankMovementComponent::IntendMoveForward(float throttle)
+void UTankMovementComponent::MoveForward(float throttle)
 {
 	throttle = FMath::Clamp(throttle, -1.0f, 1.0f);
 
 	tank_track_left->SetThrottle(throttle);
 	tank_track_right->SetThrottle(throttle);
+}
+
+void UTankMovementComponent::TurnRight(float throttle)
+{
+	throttle = FMath::Clamp(throttle, -1.0f, 1.0f);
+
+	tank_track_left->SetThrottle(throttle);
+	tank_track_right->SetThrottle(-throttle);
 }
 
 void UTankMovementComponent::InitializeComponents(UTankTrackComponent* track_left, UTankTrackComponent* track_right)

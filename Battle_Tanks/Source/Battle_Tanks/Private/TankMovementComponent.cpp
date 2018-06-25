@@ -35,4 +35,7 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 
 	auto throttle = FVector::DotProduct(tank_forward, ai_forward_intention);
 	MoveForward(throttle);
+
+	auto turn_throttle = FVector::CrossProduct(tank_forward, ai_forward_intention).Z;
+	TurnRight(turn_throttle);
 }

@@ -25,4 +25,8 @@ public:
 private:
 	ATank* player_tank;
 	ATank* controlled_tank;
+
+	// How close in radius (CM) the AI can be to the player before it stops
+	UPROPERTY(EditDefaultsOnly)
+	float acceptance_radius = 3000.0f;
 };

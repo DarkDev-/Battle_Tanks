@@ -23,6 +23,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void InitializeComponents(UTankTrackComponent* track_left, UTankTrackComponent* track_right);
 
+protected:
+	void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 
 private:
 	UTankTrackComponent* tank_track_left;

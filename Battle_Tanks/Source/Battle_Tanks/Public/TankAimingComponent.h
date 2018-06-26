@@ -53,20 +53,20 @@ private:
 	UTankBarrel* barrel;
 	UTankTurretComponent* turret;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	TSubclassOf<AProjectile> projectile_bp;
+
 	// In cm
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float launch_speed = 10000.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	TSubclassOf<AProjectile> projectile_bp;
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	int current_ammo = 10; // Int because unreal is weird and doesn't support unsigned in bp
 
 	float reload_time = 2.0f;
 	float last_fire_time = 0.0f;
 
 	FVector aim_direction;
-
-	UPROPERTY(EditAnywhere, Category = "Setup")
-	int current_ammo = 10; // Int because unreal is weird and doesn't support unsigned in bp
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "States")

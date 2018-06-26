@@ -19,7 +19,9 @@ public:
 	UTankTrackComponent();
 
 	void BeginPlay() override;
-	void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	void ApplySidewaysForce();
+	void ApplyForwardForce();
 
 	UFUNCTION(BlueprintCallable, Category = Input)
 	void SetThrottle(float throttle);
@@ -30,4 +32,9 @@ public:
 
 private:
 	UStaticMeshComponent* root;
+
+	UFUNCTION(BlueprintCallable, Category = "Event")
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	float current_throttle;
 };

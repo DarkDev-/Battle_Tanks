@@ -54,7 +54,7 @@ bool UTankAimingComponent::IsBarrelMoving()
 	if (!ensure(barrel))
 		return false;
 
-	return !barrel->GetForwardVector().Equals(aim_direction, 0.01f);
+	return !barrel->GetForwardVector().Equals(aim_direction, 0.1f);
 }
 
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)

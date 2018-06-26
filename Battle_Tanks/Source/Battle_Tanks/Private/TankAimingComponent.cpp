@@ -17,7 +17,6 @@ UTankAimingComponent::UTankAimingComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
 }
 
 void UTankAimingComponent::AimAt(const FVector location)
@@ -30,7 +29,7 @@ void UTankAimingComponent::AimAt(const FVector location)
 
 	if (UGameplayStatics::SuggestProjectileVelocity(this, launch_velocity, start_location, location, launch_speed, false, 0.0f, 0.0f, ESuggestProjVelocityTraceOption::DoNotTrace))
 	{
-		const auto aim_direction = launch_velocity.GetSafeNormal();
+		aim_direction = launch_velocity.GetSafeNormal();
 		MoveBarrel(aim_direction);
 	}
 }
@@ -48,6 +47,34 @@ void UTankAimingComponent::MoveBarrel(FVector direction)
 	turret->Rotate(delta_rotator.Yaw);
 }
 
+bool UTankAimingComponent::IsBarrelMoving()
+{
+	if (!ensure(barrel))
+		return false;
+
+	return !barrel->GetForwardVector().Equals(aim_direction, 0.01f);
+}
+
+void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+
+	if ((GetWorld()->GetTimeSeconds() - last_fire_time) < reload_time)
+		firing_state = EFiringState::RELOADING;
+	else if (IsBarrelMoving())
+		firing_state = EFiringState::AIMING;
+	else
+		firing_state = EFiringState::LOCKED;
+}
+
+void UTankAimingComponent::BeginPlay()
+{
+	Super::BeginPlay();
+
+	last_fire_time = GetWorld()->GetTimeSeconds();
+}
+
 void UTankAimingComponent::Initialize(UTankBarrel* barrel_component, UTankTurretComponent* turret_component)
 {
 	barrel = barrel_component;
@@ -59,10 +86,11 @@ void UTankAimingComponent::Fire()
 	if (!ensure(barrel))
 		return;
 
-	bool is_reloaded = (GetWorld()->GetTimeSeconds() - last_fire_time) > reload_time;
-
-	if (is_reloaded)
+	if (firing_state != EFiringState::RELOADING)
 	{
+		if (!ensure(projectile_bp))
+			return;
+
 		const FVector barrel_location = barrel->GetSocketLocation(FName("Launch_Location"));
 		const FRotator barrel_rotation = barrel->GetSocketRotation(FName("Launch_Location"));
 		const auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_bp, barrel_location, barrel_rotation);

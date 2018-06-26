@@ -48,7 +48,10 @@ void ATank::Fire()
 
 	if (is_reloaded)
 	{
-		auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_bp, barrel->GetSocketLocation(FName("Launch_Location")), barrel->GetSocketRotation(FName("Launch_Location")));
+		const FVector barrel_location = barrel->GetSocketLocation(FName("Launch_Location"));
+		const FRotator barrel_rotation = barrel->GetSocketRotation(FName("Launch_Location"));
+		const auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_bp, barrel_location, barrel_rotation);
+
 		projectile->LaunchProjectile(launch_speed);
 		last_fire_time = GetWorld()->GetTimeSeconds();
 	}

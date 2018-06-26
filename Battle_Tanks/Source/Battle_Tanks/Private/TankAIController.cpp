@@ -9,20 +9,21 @@
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	player_tank = GetPlayerTank();
+	controlled_tank = GetControlledTank();
 }
 
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (ensure(GetPlayerTank()))
-	{
-		MoveToActor(GetPlayerTank(), acceptance_radius);
+	if (!ensure(player_tank))
+		return;
 
-		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
-
-		GetControlledTank()->Fire();
-	}
+	MoveToActor(player_tank, acceptance_radius);
+	controlled_tank->AimAt(player_tank->GetActorLocation());
+	controlled_tank->Fire();
 }
 
 ATank* ATankAIController::GetControlledTank() const

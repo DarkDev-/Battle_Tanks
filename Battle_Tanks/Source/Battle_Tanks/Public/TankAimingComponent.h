@@ -11,7 +11,8 @@ enum class EFiringState : uint8
 {
 	RELOADING,
 	AIMING,
-	LOCKED
+	LOCKED,
+	OUT_OF_AMMO
 };
 
 class UTankBarrel;
@@ -45,6 +46,9 @@ public:
 
 	EFiringState GetFiringState() const { return firing_state; }
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int GetCurrentAmmo() const { return current_ammo; }
+
 private:
 	UTankBarrel* barrel;
 	UTankTurretComponent* turret;
@@ -60,6 +64,8 @@ private:
 	float last_fire_time = 0.0f;
 
 	FVector aim_direction;
+
+	int current_ammo = 3; // Int because unreal is weird and doesn't support unsigned in bp
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "States")

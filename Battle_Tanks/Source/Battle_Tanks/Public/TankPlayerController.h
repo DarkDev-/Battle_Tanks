@@ -7,6 +7,7 @@
 #include "TankPlayerController.generated.h"
 
 class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLE_TANKS_API ATankPlayerController : public APlayerController
@@ -15,6 +16,9 @@ class BATTLE_TANKS_API ATankPlayerController : public APlayerController
 
 protected:
 	void BeginPlay() override;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void SetAimingComponent(UTankAimingComponent* aiming_component);
 
 public:
 	void Tick(float DeltaTime) override;

@@ -20,17 +20,8 @@ public:
 	ATank();
 
 	void Tick(float DeltaTime) override;
-	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrel(UTankBarrel* barrel_component);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurret(UTankTurretComponent* turret_component);
 
 protected:
-	void BeginPlay() override;
-
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
 	UTankAimingComponent* aiming_component;
 

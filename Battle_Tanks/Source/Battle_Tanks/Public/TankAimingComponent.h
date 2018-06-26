@@ -32,11 +32,14 @@ public:
 	void AimAt(const FVector location, const float launch_speed);
 	void MoveBarrel(FVector direction);
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	void Initialize(UTankBarrel* barrel_component, UTankTurretComponent* turret_component);
+
 private:
 	UTankBarrel* barrel;
 	UTankTurretComponent* turret;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "States")
-	EFiringState firing_state;
+	EFiringState firing_state = EFiringState::AIMING;
 };

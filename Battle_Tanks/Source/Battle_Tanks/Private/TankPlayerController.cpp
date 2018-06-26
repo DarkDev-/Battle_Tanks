@@ -4,10 +4,15 @@
 
 #include "Tank.h"
 #include "Engine/World.h"
+#include "TankAimingComponent.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// *Sips coffee while thinking: Is this ugly?*
+	if (auto aiming_component = GetControlledTank()->FindComponentByClass<UTankAimingComponent>())
+		SetAimingComponent(aiming_component);
 }
 
 void ATankPlayerController::Tick(float DeltaTime)

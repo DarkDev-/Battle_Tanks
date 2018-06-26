@@ -65,7 +65,8 @@ private:
 
 	FVector aim_direction;
 
-	int current_ammo = 3; // Int because unreal is weird and doesn't support unsigned in bp
+	UPROPERTY(EditAnywhere, Category = "Setup")
+	int current_ammo = 10; // Int because unreal is weird and doesn't support unsigned in bp
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "States")

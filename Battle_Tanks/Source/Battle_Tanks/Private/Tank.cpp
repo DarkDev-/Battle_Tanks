@@ -27,7 +27,7 @@ void ATank::Tick(float DeltaTime)
 
 void ATank::AimAt(const FVector location)
 {
-	if (!aiming_component)
+	if (!ensure(aiming_component))
 		return;
 
 	aiming_component->AimAt(location, launch_speed);

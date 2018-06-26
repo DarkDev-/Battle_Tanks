@@ -21,7 +21,7 @@ void UTankMovementComponent::TurnRight(float throttle)
 
 void UTankMovementComponent::InitializeComponents(UTankTrackComponent* track_left, UTankTrackComponent* track_right)
 {
-	if (!track_left || !track_right)
+	if (!ensure(track_left || track_right))
 		return;
 
 	tank_track_left = track_left;

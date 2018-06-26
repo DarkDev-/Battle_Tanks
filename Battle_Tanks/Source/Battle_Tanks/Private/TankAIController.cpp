@@ -14,7 +14,7 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (GetPlayerTank())
+	if (ensure(GetPlayerTank()))
 	{
 		MoveToActor(GetPlayerTank(), acceptance_radius);
 

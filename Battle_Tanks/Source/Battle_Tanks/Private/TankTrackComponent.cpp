@@ -35,7 +35,7 @@ void UTankTrackComponent::ApplyForwardForce()
 	const FVector applied_force = GetForwardVector() * current_throttle * max_force * 100.0f;
 	const FVector force_location = GetComponentLocation();
 	const auto root = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	root->AddForceAtLocation(applied_force, force_location); // TODO: I Think it is because of this that the tank starts to fly
+	root->AddForceAtLocation(applied_force, force_location); // TODO: I Think it is because of this that the tank starts to fly/wheele
 }
 
 void UTankTrackComponent::SetThrottle(float throttle)

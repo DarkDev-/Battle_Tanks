@@ -6,7 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-class ATank;
 class UTankAimingComponent;
 
 UCLASS()
@@ -23,9 +22,6 @@ protected:
 public:
 	void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 private:
 	void AimTowardsCrosshair();
 	bool GetLookAtLocation(FVector& hit_location) const;
@@ -41,4 +37,7 @@ private:
 	// In cm	
 	UPROPERTY(EditDefaultsOnly)
 	float trace_range = 1000000.0f;
+
+	UTankAimingComponent* aiming_component;
+	APawn* controlled_tank;
 };

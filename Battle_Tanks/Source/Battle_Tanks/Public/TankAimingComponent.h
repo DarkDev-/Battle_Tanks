@@ -16,6 +16,7 @@ enum class EFiringState : uint8
 
 class UTankBarrel;
 class UTankTurretComponent;
+class AProjectile;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLE_TANKS_API UTankAimingComponent : public UActorComponent
@@ -25,19 +26,32 @@ class BATTLE_TANKS_API UTankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	
-	void SetBarrel(UTankBarrel* barrel_to_set) { if(barrel_to_set) barrel = barrel_to_set; }
-	void SetTurret(UTankTurretComponent* turret_to_set) { if(turret_to_set) turret = turret_to_set; }
-
-	void AimAt(const FVector location, const float launch_speed);
-	void MoveBarrel(FVector direction);
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialize(UTankBarrel* barrel_component, UTankTurretComponent* turret_component);
 
+	void SetBarrel(UTankBarrel* barrel_to_set) { if(barrel_to_set) barrel = barrel_to_set; }
+	void SetTurret(UTankTurretComponent* turret_to_set) { if(turret_to_set) turret = turret_to_set; }
+
+	void AimAt(const FVector location);
+	void MoveBarrel(FVector direction);
+	
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
 private:
 	UTankBarrel* barrel;
 	UTankTurretComponent* turret;
+
+	// In cm
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float launch_speed = 10000.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	TSubclassOf<AProjectile> projectile_bp;
+
+	float reload_time = 2.0f;
+	float last_fire_time = 0.0f;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "States")

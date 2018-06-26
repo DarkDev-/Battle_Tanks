@@ -6,7 +6,7 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class BATTLE_TANKS_API ATankAIController : public AAIController
@@ -18,13 +18,11 @@ protected:
 
 public:
 	void Tick(float DeltaTime) override;
-
-	ATank* GetControlledTank() const;
-	ATank* GetPlayerTank() const;
 	
 private:
-	ATank* player_tank;
-	ATank* controlled_tank;
+	APawn* player_tank;
+	APawn* controlled_tank;
+	UTankAimingComponent* aiming_component;
 
 	// How close in radius (CM) the AI can be to the player before it stops
 	UPROPERTY(EditDefaultsOnly)

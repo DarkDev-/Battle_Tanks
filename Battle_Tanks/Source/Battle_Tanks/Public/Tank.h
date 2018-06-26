@@ -19,6 +19,7 @@ class BATTLE_TANKS_API ATank : public APawn
 public:
 	ATank();
 
+	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
 
 protected:

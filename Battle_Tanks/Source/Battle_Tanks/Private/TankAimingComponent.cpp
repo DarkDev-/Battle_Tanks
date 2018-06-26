@@ -46,7 +46,7 @@ void UTankAimingComponent::MoveBarrel(FVector direction)
 	turret->Rotate(delta_rotator.Yaw);
 }
 
-void UTankAimingComponent::Initialize(UTankBarrel * barrel_component, UTankTurretComponent * turret_component)
+void UTankAimingComponent::Initialize(UTankBarrel* barrel_component, UTankTurretComponent* turret_component)
 {
 	barrel = barrel_component;
 	turret = turret_component;

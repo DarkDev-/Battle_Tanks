@@ -5,7 +5,6 @@
 #include "Engine/World.h"
 
 #include "TankAimingComponent.h"
-#include "TankMovementComponent.h"
 
 #include "Projectile.h"
 #include "TankBarrel.h"
@@ -17,6 +16,13 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = true;
 
 	UE_LOG(LogTemp, Warning, TEXT("SLOTH: Creating %s"), *GetName());
+}
+
+void ATank::BeginPlay()
+{
+	Super::BeginPlay();
+
+	aiming_component = FindComponentByClass<UTankAimingComponent>();
 }
 
 void ATank::Tick(float DeltaTime)

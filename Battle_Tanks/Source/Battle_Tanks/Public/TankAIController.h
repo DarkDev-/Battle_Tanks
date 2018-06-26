@@ -25,6 +25,6 @@ private:
 	UTankAimingComponent* aiming_component;
 
 	// How close in radius (CM) the AI can be to the player before it stops
-	UPROPERTY(EditDefaultsOnly)
-	float acceptance_radius = 3000.0f;
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float acceptance_radius = 5000.0f;
 };

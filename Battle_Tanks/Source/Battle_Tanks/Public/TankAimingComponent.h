@@ -43,6 +43,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Fire();
 
+	EFiringState GetFiringState() const { return firing_state; }
+
 private:
 	UTankBarrel* barrel;
 	UTankTurretComponent* turret;

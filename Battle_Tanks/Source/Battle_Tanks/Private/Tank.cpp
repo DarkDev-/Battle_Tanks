@@ -21,3 +21,11 @@ void ATank::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
+float ATank::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float damage_to_apply = FMath::Clamp(Damage, 0.0f, current_health);
+	current_health -= current_health > 0.0f ? damage_to_apply : 0.0f;
+
+	return damage_to_apply;
+}

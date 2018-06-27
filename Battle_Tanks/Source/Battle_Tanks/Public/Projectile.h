@@ -46,4 +46,7 @@ private:
 	void OnDestroyProjectileEnd();
 	float destroy_delay = 2.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Projectile")
+	float projectile_damage = 20.0f;
+
 };

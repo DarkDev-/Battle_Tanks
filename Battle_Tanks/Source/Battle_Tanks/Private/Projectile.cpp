@@ -2,10 +2,12 @@
 
 #include "Projectile.h"
 
+#include "Components/StaticMeshComponent.h"
+
 #include "Engine/World.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
-#include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
@@ -51,6 +53,8 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor,
 
 	SetRootComponent(impact_blast);
 	collision_mesh->DestroyComponent();
+
+	UGameplayStatics::ApplyRadialDamage(this, projectile_damage, GetActorLocation(), explosion_force->Radius, UDamageType::StaticClass(), TArray<AActor*>());
 
 	GetWorld()->GetTimerManager().SetTimer(destroy_projectile_handle, this, &AProjectile::OnDestroyProjectileEnd, destroy_delay, false);
 }

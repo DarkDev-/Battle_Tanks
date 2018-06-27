@@ -44,7 +44,7 @@ bool ATankPlayerController::GetLookAtLocation(FVector& hit_location) const
 		const auto trace_end = trace_start + (look_direction * trace_range);
 
 		FHitResult hit;
-		if (GetWorld()->LineTraceSingleByChannel(hit, trace_start, trace_end, ECC_Visibility))
+		if (GetWorld()->LineTraceSingleByChannel(hit, trace_start, trace_end, ECC_Camera))
 		{
 			hit_location = hit.Location;
 			return true;
@@ -89,6 +89,5 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 
 void ATankPlayerController::OnDeath()
 {
-	UE_LOG(LogTemp, Warning, TEXT("LOL"));
-
+	StartSpectatingOnly(); // idk
 }

@@ -4,6 +4,7 @@
 
 #include "Engine/World.h"
 
+#include "Tank.h"
 #include "TankAimingComponent.h"
 
 void ATankPlayerController::BeginPlay()
@@ -70,4 +71,24 @@ FVector2D ATankPlayerController::GetCrosshairLocation() const
 	int vp_x, vp_y;
 	GetViewportSize(vp_x, vp_y);
 	return FVector2D(vp_x * crosshair_x_location, vp_y * crosshair_y_location);
+}
+
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+
+	if (InPawn)
+	{
+		auto possesed_tank = Cast<ATank>(InPawn);
+		if (!ensure(possesed_tank))
+			return;
+
+		possesed_tank->on_death.AddUniqueDynamic(this, &ATankPlayerController::OnDeath);
+	}
+}
+
+void ATankPlayerController::OnDeath()
+{
+	UE_LOG(LogTemp, Warning, TEXT("LOL"));
+
 }

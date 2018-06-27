@@ -40,4 +40,9 @@ private:
 
 	UTankAimingComponent* aiming_component;
 	APawn* controlled_tank;
+
+	void SetPawn(APawn* InPawn) override;
+
+	UFUNCTION()
+	void OnDeath();
 };

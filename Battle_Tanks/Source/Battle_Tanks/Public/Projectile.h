@@ -8,6 +8,7 @@
 
 class UProjectileMovementComponent;
 class UParticleSystemComponent;
+class URadialForceComponent;
 
 UCLASS()
 class BATTLE_TANKS_API AProjectile : public AActor
@@ -33,6 +34,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Particles")
 	UParticleSystemComponent* impact_blast;
+
+	UPROPERTY(VisibleAnywhere, Category = "Projectile")
+	URadialForceComponent* explosion_force;
 
 private:
 	UFUNCTION(BlueprintCallable, Category = "Event")

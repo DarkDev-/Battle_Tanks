@@ -3,9 +3,11 @@
 #include "Projectile.h"
 
 #include "GameFramework/ProjectileMovementComponent.h"
-#include "Particles/ParticleSystemComponent.h"
 
 #include "Components/StaticMeshComponent.h"
+
+#include "Particles/ParticleSystemComponent.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 
 AProjectile::AProjectile()
 {
@@ -22,9 +24,11 @@ AProjectile::AProjectile()
 	impact_blast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	impact_blast->bAutoActivate = false;
 	
+	explosion_force = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force Component"));
+	explosion_force->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
 	projectile_movement_component = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement Component"));
 	projectile_movement_component->bAutoActivate = false;
-
 }
 
 // Called when the game starts or when spawned
@@ -39,6 +43,8 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor,
 {
 	launch_blast->Deactivate();
 	impact_blast->Activate();
+
+	explosion_force->FireImpulse();
 }
 
 void AProjectile::LaunchProjectile(const float speed)

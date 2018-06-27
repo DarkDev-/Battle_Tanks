@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FTankDelegate);
+
 UCLASS()
 class BATTLE_TANKS_API ATank : public APawn
 {
@@ -21,6 +23,8 @@ public:
 	
 	UFUNCTION(BlueprintPure, Category = "Tank")
 	float GetHealthPercentage() const { return current_health / starting_health; } // I could just return the current health as max health is 100, but what if I change it? dun dun duuun
+
+	FTankDelegate on_death;
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category = "Tank")

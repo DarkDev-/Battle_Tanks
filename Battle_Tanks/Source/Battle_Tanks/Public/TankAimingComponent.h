@@ -63,7 +63,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	int current_ammo = 10; // Int because unreal is weird and doesn't support unsigned in bp
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float reload_time = 2.0f;
+
 	float last_fire_time = 0.0f;
 
 	FVector aim_direction;

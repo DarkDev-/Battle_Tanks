@@ -17,6 +17,8 @@ class BATTLE_TANKS_API AProjectile : public AActor
 public:	
 	AProjectile();
 
+	void LaunchProjectile(const float speed);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -32,7 +34,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Particles")
 	UParticleSystemComponent* impact_blast;
 
-public:	
-	void LaunchProjectile(const float speed);
+private:
+	UFUNCTION(BlueprintCallable, Category = "Event")
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
 };

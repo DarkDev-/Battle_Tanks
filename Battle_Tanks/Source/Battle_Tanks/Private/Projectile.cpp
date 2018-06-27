@@ -4,9 +4,9 @@
 
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+
 #include "Components/StaticMeshComponent.h"
 
-// Sets default values
 AProjectile::AProjectile()
 {
 	collision_mesh = CreateDefaultSubobject<UStaticMeshComponent>(FName("Collision Mesh Component"));
@@ -32,6 +32,13 @@ void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	collision_mesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
+}
+
+void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
+{
+	launch_blast->Deactivate();
+	impact_blast->Activate();
 }
 
 void AProjectile::LaunchProjectile(const float speed)

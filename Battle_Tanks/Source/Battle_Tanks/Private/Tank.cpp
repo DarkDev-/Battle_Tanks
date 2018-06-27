@@ -14,6 +14,8 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	current_health = starting_health;
 }
 
 void ATank::Tick(float DeltaTime)

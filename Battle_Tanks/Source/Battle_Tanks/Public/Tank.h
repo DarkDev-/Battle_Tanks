@@ -31,5 +31,5 @@ private:
 	float starting_health = 100;
 
 	UPROPERTY(EditAnywhere, Category = "Tank")
-	float current_health = starting_health;
+	float current_health;
 };

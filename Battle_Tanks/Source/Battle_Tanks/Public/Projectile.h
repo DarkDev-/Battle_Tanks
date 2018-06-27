@@ -42,4 +42,8 @@ private:
 	UFUNCTION(BlueprintCallable, Category = "Event")
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
+	FTimerHandle destroy_projectile_handle;
+	void OnDestroyProjectileEnd();
+	float destroy_delay = 2.0f;
+
 };

@@ -61,7 +61,7 @@ private:
 	float launch_speed = 10000.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
-	int current_ammo = 10; // Int because unreal is weird and doesn't support unsigned in bp
+	int current_ammo = 30; // Int because unreal is weird and doesn't support unsigned in bp
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float reload_time = 2.0f;

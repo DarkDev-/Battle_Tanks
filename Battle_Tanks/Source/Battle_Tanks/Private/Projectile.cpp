@@ -2,12 +2,15 @@
 
 #include "Projectile.h"
 
+#include "Engine/World.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 
 #include "Components/StaticMeshComponent.h"
 
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+
+#include "TimerManager.h"
 
 AProjectile::AProjectile()
 {
@@ -45,6 +48,16 @@ void AProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor,
 	impact_blast->Activate();
 
 	explosion_force->FireImpulse();
+
+	SetRootComponent(impact_blast);
+	collision_mesh->DestroyComponent();
+
+	GetWorld()->GetTimerManager().SetTimer(destroy_projectile_handle, this, &AProjectile::OnDestroyProjectileEnd, destroy_delay, false);
+}
+
+void AProjectile::OnDestroyProjectileEnd()
+{
+	this->Destroy();
 }
 
 void AProjectile::LaunchProjectile(const float speed)
